@@ -34,6 +34,13 @@ namespace Crud.Controllers
         {
             if (ModelState.IsValid)
             {
+                var existEmployee = _context.EmployeeRegister.FirstOrDefault(e => e.EmployeeEmail == employeeRegister.EmployeeEmail);
+                if (existEmployee != null)
+                {
+                    ModelState.AddModelError("EmployeeEmail", "User already registered");
+                    return View(employeeRegister);
+                }
+
                 _context.EmployeeRegister.Add(employeeRegister);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
@@ -94,6 +101,8 @@ namespace Crud.Controllers
             }
             return RedirectToAction(("Index"));
         }
+
+        
 
     }
 }

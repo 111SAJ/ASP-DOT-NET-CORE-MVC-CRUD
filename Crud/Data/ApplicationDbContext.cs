@@ -10,6 +10,11 @@ namespace Crud.Data
         
         }
         public DbSet<EmployeeRegister> EmployeeRegister { get; set; }
+        public DbSet<Login> Login { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Login>().HasNoKey();
+        }
     }
 }
